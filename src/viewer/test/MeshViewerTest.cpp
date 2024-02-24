@@ -5,7 +5,7 @@
 #include <igl/read_triangle_mesh.h>
 #include <string>
 
-NAMESPACE_BEGIN(PROJ_NAME)
+NAMESPACE_BEGIN(GEOBOX)
     namespace viewer::unit_test {
         using namespace detail;
 
@@ -22,10 +22,10 @@ NAMESPACE_BEGIN(PROJ_NAME)
         }
 
     } // namespace viewer::unit_test
-NAMESPACE_END(PROJ_NAME)
+NAMESPACE_END(GEOBOX)
 
 int main(int argc, char **argv) {
-    using namespace PROJ_NAME::viewer::unit_test;
+    using namespace GEOBOX::viewer::unit_test;
 
     testMeshViewer(R"(F:\VisualStudioProgram\3DThinShell\model\bunny.off)");
 

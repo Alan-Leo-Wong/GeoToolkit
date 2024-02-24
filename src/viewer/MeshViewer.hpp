@@ -11,7 +11,7 @@
 #include <igl/opengl/glfw/imgui/ImGuiMenu.h>
 #include <igl/opengl/glfw/imgui/ImGuiHelpers.h>
 
-NAMESPACE_BEGIN(PROJ_NAME)
+NAMESPACE_BEGIN(GEOBOX)
 namespace viewer {
     using namespace igl::opengl::glfw;
 
@@ -29,6 +29,6 @@ namespace viewer {
     };
 
 }
-NAMESPACE_END(PROJ_NAME)
+NAMESPACE_END(GEOBOX)
 
 #endif //GEOBOX_MESHVIEWER_HPP

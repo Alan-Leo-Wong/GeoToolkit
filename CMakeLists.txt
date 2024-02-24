@@ -71,7 +71,6 @@ include(add_lib)
 include(add_test)
 include(get_sub_dirs)
 include(igl_copy_dll)
-include(GNUInstallDirs)
 
 ###########################################
 # 3rdParty

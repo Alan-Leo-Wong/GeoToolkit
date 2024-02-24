@@ -1,10 +1,14 @@
+if(TARGET Boost::boost)
+    return()
+endif()
+
 message(STATUS "Third-party: creating targets 'Boost::boost'...")
 
 include(FetchContent)
 FetchContent_Declare(
         boost-cmake
-        GIT_REPOSITORY https://github.com/Orphis/boost-cmake.git
-        GIT_TAG 7f97a08b64bd5d2e53e932ddf80c40544cf45edf
+        GIT_REPOSITORY https://github.com/libigl/boost-cmake.git
+        GIT_TAG 6bcae68ffbaaefad4583a2642ce9ea53e5e01707
 )
 
 set(PREVIOUS_CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
@@ -14,12 +18,12 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # This guy will download boost using FetchContent
 FetchContent_GetProperties(boost-cmake)
-if (NOT boost-cmake_POPULATED)
+if(NOT boost-cmake_POPULATED)
     FetchContent_Populate(boost-cmake)
     # File lcid.cpp from Boost_locale.cpp doesn't compile on MSVC, so we exclude them from the default
     # targets being built by the project (only targets explicitly used by other targets will be built).
     add_subdirectory(${boost-cmake_SOURCE_DIR} ${boost-cmake_BINARY_DIR} EXCLUDE_FROM_ALL)
-endif ()
+endif()
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ${OLD_CMAKE_POSITION_INDEPENDENT_CODE})
 set(CMAKE_CXX_FLAGS "${PREVIOUS_CMAKE_CXX_FLAGS}")
@@ -52,8 +56,8 @@ set(boost_modules
         thread
         type_erasure
 )
-foreach (module IN ITEMS ${boost_modules})
-    if (TARGET Boost_${module})
+foreach(module IN ITEMS ${boost_modules})
+    if(TARGET Boost_${module})
         set_target_properties(Boost_${module} PROPERTIES FOLDER ThirdParty/Boost)
-    endif ()
-endforeach ()
+    endif()
+endforeach()

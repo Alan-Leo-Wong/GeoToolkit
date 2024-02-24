@@ -10,7 +10,7 @@ function(add_test module_name)
 
     # For IDEs that present targets using a folder hierarchy,
     # this property specifies the name of the folder to place the target under
-    set_target_properties(test_${module_name} PROPERTIES FOLDER Geobox_UnitTests)
+    set_target_properties(test_${module_name} PROPERTIES FOLDER GeoboxUnitTests)
 
     # Output directory
     set_target_properties(test_${module_name} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Tests")

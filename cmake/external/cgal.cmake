@@ -1,3 +1,7 @@
+if(TARGET CGAL::CGAL)
+    return()
+endif()
+
 message(STATUS "Third-party: creating target 'CGAL::CGAL'")
 
 include(FetchContent)
@@ -7,9 +11,9 @@ FetchContent_Declare(
         URL_MD5 793da2d1597f3a5c0e3524f73a0b4039
 )
 FetchContent_GetProperties(cgal)
-if (cgal_POPULATED)
+if(cgal_POPULATED)
     return()
-endif ()
+endif()
 FetchContent_Populate(cgal)
 
 function(cgal_import_target)
@@ -48,7 +52,7 @@ function(cgal_import_target)
 
     # https://stackoverflow.com/a/71714947/148668
     set(CGAL_DATA_DIR "unspecified")
-    find_package(CGAL REQUIRED CONFIG COMPONENTS Core PATHS ${cgal_SOURCE_DIR} NO_DEFAULT_PATH)
+    find_package(CGAL CONFIG COMPONENTS Core PATHS ${cgal_SOURCE_DIR} NO_DEFAULT_PATH)
 endfunction()
 
 cgal_import_target()

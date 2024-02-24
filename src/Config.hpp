@@ -20,7 +20,7 @@
 #endif
 
 /* namespace macro */
-#define PROJ_NAME geobox
+#define GEOBOX geobox
 
 #if !defined(NAMESPACE_BEGIN)
 #define NAMESPACE_BEGIN(name) namespace name {

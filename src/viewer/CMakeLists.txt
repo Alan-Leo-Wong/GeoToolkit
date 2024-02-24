@@ -13,7 +13,7 @@ target_sources(GEOBOX_VIEWER
 
 target_link_libraries(GEOBOX_VIEWER
         PUBLIC
-        GEOBOX::DETAIL
+#        GEOBOX::DETAIL
         igl::core
         igl::glfw
         igl::imgui

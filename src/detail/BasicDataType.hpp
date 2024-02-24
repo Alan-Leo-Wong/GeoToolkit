@@ -24,9 +24,10 @@ namespace std {
     };
 }
 
-NAMESPACE_BEGIN(PROJ_NAME)
+NAMESPACE_BEGIN(GEOBOX)
     namespace detail {
         typedef unsigned int uint;
+        typedef size_t index_t;
 
 #ifdef USING_FLOAT
         typedef float Scalar;
@@ -84,12 +85,12 @@ NAMESPACE_BEGIN(PROJ_NAME)
         using SpTriplet = _SpTriplet<Scalar>;
         using SpITriplet = _SpTriplet<int>;
     }
-NAMESPACE_END(PROJ_NAME)
+NAMESPACE_END(GEOBOX)
 
 template<>
-struct std::less<PROJ_NAME::detail::ArrayX<PROJ_NAME::detail::Scalar, 4>> {
+struct std::less<GEOBOX::detail::ArrayX<GEOBOX::detail::Scalar, 4>> {
 public:
-    using Array4 = PROJ_NAME::detail::ArrayX<PROJ_NAME::detail::Scalar, 4>;
+    using Array4 = GEOBOX::detail::ArrayX<GEOBOX::detail::Scalar, 4>;
 
     bool operator()(const Array4 &a, const Array4 &b) const {
         for (int i = 0; i < a.size(); ++i) {
@@ -103,9 +104,9 @@ public:
 };
 
 template<>
-struct std::less<PROJ_NAME::detail::VectorX> {
+struct std::less<GEOBOX::detail::VectorX> {
 public:
-    using VectorX = PROJ_NAME::detail::VectorX;
+    using VectorX = GEOBOX::detail::VectorX;
 
     bool operator()(const VectorX &a, const VectorX &b) const {
         for (int i = 0; i < a.size(); ++i) {
@@ -119,9 +120,9 @@ public:
 };
 
 template<>
-struct std::less<PROJ_NAME::detail::Vector3> {
+struct std::less<GEOBOX::detail::Vector3> {
 public:
-    using Vector3 = PROJ_NAME::detail::Vector3;
+    using Vector3 = GEOBOX::detail::Vector3;
 
     bool operator()(const Vector3 &a, const Vector3 &b) const {
         for (int i = 0; i < 3; ++i) {
@@ -135,9 +136,9 @@ public:
 };
 
 template<>
-struct std::less<PROJ_NAME::detail::Vector4> {
+struct std::less<GEOBOX::detail::Vector4> {
 public:
-    using Vector4 = PROJ_NAME::detail::Vector4;
+    using Vector4 = GEOBOX::detail::Vector4;
 
     bool operator()(const Vector4 &a, const Vector4 &b) const {
         for (int i = 0; i < 4; ++i) {

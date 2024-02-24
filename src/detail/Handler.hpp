@@ -1,11 +1,11 @@
 ﻿#pragma once
 
-#include "Config.hpp"
+#include <Config.hpp>
 #include <cstdio>
 #include <cstdlib>
 #include <string>
 
-NAMESPACE_BEGIN(PROJ_NAME)
+NAMESPACE_BEGIN(GEOBOX)
     namespace detail {
 #define GEOBOX_FMT_CSTR(description, ...) description
 #define GEOBOX_FMT_STR(description, ...) std::string(description)
@@ -63,4 +63,4 @@ NAMESPACE_BEGIN(PROJ_NAME)
 #endif
 
     } // namespace detail
-NAMESPACE_END(PROJ_NAME)
+NAMESPACE_END(GEOBOX)

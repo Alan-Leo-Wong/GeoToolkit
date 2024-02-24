@@ -6,7 +6,7 @@
 #include <type_traits>
 #include <iostream>
 
-NAMESPACE_BEGIN(PROJ_NAME)
+NAMESPACE_BEGIN(GEOBOX)
     namespace detail {
         // Use standard mathematical constants' M_PI if available
 #ifdef M_PI
@@ -52,7 +52,7 @@ NAMESPACE_BEGIN(PROJ_NAME)
         class SetElementAt<_Scalar, _Scalar> {
         public:
             static void impl(_Scalar &s, _Scalar value, int at) {
-                OFFSET_ENSURE(at == 0, "is {}", OFFSET_FMT_ARG(at));
+                GEOBOX_ENSURE(at == 0, "is {}", GEOBOX_FMT_ARG(at));
                 s = value;
             }
         };
@@ -104,7 +104,7 @@ NAMESPACE_BEGIN(PROJ_NAME)
         /// Sets point ``p`` to zero, with ``p`` being a matrix or a _Scalar.
         ///
         template<class T>
-        void setToZero(T &p) {
+        inline void setToZero(T &p) {
             return detail::SetToZero<T>::impl(p);
         }
 
@@ -112,14 +112,14 @@ NAMESPACE_BEGIN(PROJ_NAME)
         /// matrix or a _Scalar. If ``p`` is a _Scalar, ``i`` must be ``0``.
         ///
         template<class T, class _Scalar>
-        void setElementAt(T &p, _Scalar value, int i) {
+        inline void setElementAt(T &p, _Scalar value, int i) {
             return detail::SetElementAt<T, _Scalar>::impl(p, value, i);
         }
 
         /// Returns the squared 2-norm of ``p``, with ``p`` being a vector or a _Scalar.
         ///
         template<class T>
-        auto squaredNorm(T const &p) -> decltype(detail::SquaredNorm<T>::impl(p)) {
+        inline auto squaredNorm(T const &p) -> decltype(detail::SquaredNorm<T>::impl(p)) {
             return detail::SquaredNorm<T>::impl(p);
         }
 
@@ -166,13 +166,19 @@ NAMESPACE_BEGIN(PROJ_NAME)
         }
 
         template<typename T>
-        int dcmp(const T &x, const T &epsilon) {
+        inline int dcmp(const T &x, const T &epsilon) {
             if (std::abs(x) < epsilon) return 0;
             else return x < 0 ? -1 : 1;
         }
 
+        template <typename T>
+        inline void clamp(T& x, T min, T max) {
+            if(x < min) x = min;
+            else if(x > max)  x = max;
+        }
+
         template<typename T>
-        void traverseSparseMat(const _SpMatrix<T> &spMat) {
+        inline void traverseSparseMat(const _SpMatrix<T> &spMat) {
             // _SpMatrix是列优先存储，所以优先遍历每列的非空元素，即使第一层for循环使用了rows()
             for (int k = 0; k < /*spMat.rows()*/spMat.outerSize(); ++k) {
                 for (typename _SpMatrix<T>::InnerIterator it(spMat, k); it; ++it) {
@@ -226,4 +232,4 @@ NAMESPACE_BEGIN(PROJ_NAME)
         }
 
     } // namespace detail
-NAMESPACE_END(PROJ_NAME)
+NAMESPACE_END(GEOBOX)
