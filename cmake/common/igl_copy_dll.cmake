@@ -1,7 +1,5 @@
 # Transitively list all link libraries of a target (recursive call)
-# 递归列出目标的所有链接库依赖（递归调用）
 function(igl_get_dependencies_recursive OUTPUT_VARIABLE TARGET)
-    # 获取目标的别名（如果存在）
     get_target_property(_aliased ${TARGET} ALIASED_TARGET)
     if (_aliased)
         set(TARGET ${_aliased})
@@ -11,35 +9,28 @@ function(igl_get_dependencies_recursive OUTPUT_VARIABLE TARGET)
     get_target_property(_IMPORTED ${TARGET} IMPORTED)
     get_target_property(_TYPE ${TARGET} TYPE)
     if (_IMPORTED OR (${_TYPE} STREQUAL "INTERFACE_LIBRARY"))
-        # 如果是 IMPORTED 或 INTERFACE_LIBRARY 类型，获取接口链接库依赖
         get_target_property(TARGET_DEPENDENCIES ${TARGET} INTERFACE_LINK_LIBRARIES)
     else ()
-        # 否则，获取普通链接库依赖
         get_target_property(TARGET_DEPENDENCIES ${TARGET} LINK_LIBRARIES)
     endif ()
 
     # MKL-specific list of runtime dependencies
-    # 获取特定于 MKL 的运行时依赖关系
     get_property(RUNTIME_DEPENDENCIES TARGET ${TARGET} PROPERTY mkl_RUNTIME_DEPENDENCIES)
     if (RUNTIME_DEPENDENCIES)
         #        message(STATUS "RUNTIME_DEPENDENCIES = ${RUNTIME_DEPENDENCIES}")
         list(APPEND TARGET_DEPENDENCIES ${RUNTIME_DEPENDENCIES})
     endif ()
 
-    # 设置已访问的目标集合
     set(VISITED_TARGETS ${${OUTPUT_VARIABLE}})
 
-    # 遍历目标依赖关系
     foreach (DEPENDENCY IN ITEMS ${TARGET_DEPENDENCIES})
         message(STATUS "DEPENDENCY = ${DEPENDENCY}")
         if (TARGET ${DEPENDENCY})
-            # 获取依赖目标的别名（如果存在）
             get_target_property(_aliased ${DEPENDENCY} ALIASED_TARGET)
             if (_aliased)
                 set(DEPENDENCY ${_aliased})
             endif ()
 
-            # 如果依赖目标未被访问过，则递归调用 igl_get_dependencies_recursive
             if (NOT (DEPENDENCY IN_LIST VISITED_TARGETS))
                 list(APPEND VISITED_TARGETS ${DEPENDENCY})
                 igl_get_dependencies_recursive(VISITED_TARGETS ${DEPENDENCY})

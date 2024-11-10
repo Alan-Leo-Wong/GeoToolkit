@@ -42,12 +42,12 @@ option(GEOGRAM_WITH_TRIANGLE "Use Triangle" OFF)
 
 ###########################################
 # Project settings
-project(Geobox)
+project(GeoToolkit)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(GEOBOX_EXTERNAL ${CMAKE_BINARY_DIR}/external/)
+set(GEOToolKit_EXTERNAL ${CMAKE_BINARY_DIR}/external/)
 
 # RelWithDebug for MSVC
 if (MSVC)
@@ -74,7 +74,7 @@ include(igl_copy_dll)
 
 ###########################################
 # 3rdParty
-include(GeoBoxDependencies)
+include(GeoToolKitDependencies)
 
 # Enable OpenMP
 find_package(OpenMP REQUIRED)

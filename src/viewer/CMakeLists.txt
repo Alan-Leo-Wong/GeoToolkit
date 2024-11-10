@@ -1,19 +1,19 @@
-add_lib(GEOBOX_VIEWER)
+add_lib(GEOToolKit_VIEWER)
 
-target_sources(GEOBOX_VIEWER
+target_sources(GEOToolKit_VIEWER
         PRIVATE
         MeshViewer.hpp
         MeshViewer.cpp
 )
 
-#target_include_directories(GEOBOX_VIEWER
+#target_include_directories(GEOToolKit_VIEWER
 #        PRIVATE
 #        ${CMAKE_SOURCE_DIR}/src
 #)
 
-target_link_libraries(GEOBOX_VIEWER
+target_link_libraries(GEOToolKit_VIEWER
         PUBLIC
-#        GEOBOX::DETAIL
+#        GEOToolKit::DETAIL
         igl::core
         igl::glfw
         igl::imgui
@@ -40,6 +40,6 @@ if (ENABLE_TEST)
         add_test(${test_module_name} ${test_source})
     endforeach ()
 
-    target_link_libraries(test_MeshViewer PRIVATE GEOBOX_VIEWER CLI11)
+    target_link_libraries(test_MeshViewer PRIVATE GEOToolKit_VIEWER CLI11)
 
 endif ()

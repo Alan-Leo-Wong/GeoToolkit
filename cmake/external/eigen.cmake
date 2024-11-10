@@ -1,3 +1,7 @@
+if (TARGET Eigen3::Eigen)
+    return()
+endif ()
+
 message(STATUS "Third-party: creating target 'Eigen3::Eigen'")
 
 include(FetchContent)

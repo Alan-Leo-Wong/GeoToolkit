@@ -1,9 +1,9 @@
 function(add_lib module_name)
     # Check module name
-    if(NOT ${module_name} MATCHES "^GEOBOX_")
-        message(FATAL_ERROR "GEOBOX module name should start with 'GEOBOX_'")
+    if(NOT ${module_name} MATCHES "^GEOToolKit_")
+        message(FATAL_ERROR "GEOToolKit module name should start with 'GEOToolKit_'")
     endif()
-    string(REPLACE "GEOBOX_" "" module_shortname ${module_name})
+    string(REPLACE "GEOToolKit_" "" module_shortname ${module_name})
 
     #    cmake_parse_arguments(ADD_LIB "" "INTERFACE" "" ${ARGN})
 
@@ -18,8 +18,8 @@ function(add_lib module_name)
     endif ()
 
     # Alias target name
-    message(STATUS "Creating ${TARGET_KIND} target: GEOBOX::${module_shortname} (${module_name})")
-    add_library(GEOBOX::${module_shortname} ALIAS ${module_name})
+    message(STATUS "Creating ${TARGET_KIND} target: GEOToolKit::${module_shortname} (${module_name})")
+    add_library(GEOToolKit::${module_shortname} ALIAS ${module_name})
 
     if (DISPLAY_WARNING)
         target_compile_options(${module_name} PRIVATE -Wall -Wextra -Wpedantic -Wno-sign-compare -Werror -Wno-gnu -Wno-unknown-pragmas)
